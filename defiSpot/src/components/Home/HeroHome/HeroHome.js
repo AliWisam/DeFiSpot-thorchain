@@ -12,31 +12,37 @@ const ETH_XRUNE = "http://44.238.90.227:8080/v2/pool/ETH.XRUNE-0X8626DB1A4F9F3E1
 
 export const HeroHome = () => {
 
-    let [bNB_BUSD, setBNB_BUSD] = useState(null);
-    let [bCH_BCH, setBCH_BCH] = useState(null);
-    let [bTC_BTC, setBTC_BTC] = useState(null);
-    let [eTH_XRUNE, setETH_XRUNE] = useState(null);
+    let [bNB_BUSD, setBNB_BUSD] = useState("");
+    let [bCH_BCH, setBCH_BCH] = useState("");
+    let [bTC_BTC, setBTC_BTC] = useState("");
+    let [eTH_XRUNE, setETH_XRUNE] = useState("");
+    let [eTH_XRUNE_Asset, setETH_XRUNE_Asset] = useState("");
 
     useEffect(() => {
       axios.get(BNB_BUSD).then((response) => {
         console.log("data=>>>>",response.data);
         setBNB_BUSD(response.data);
       });
-      axios.get(BNB_BUSD).then((response) => {
-        console.log("data=>>>>",response.data);
+      axios.get(BCH_BCH).then((response) => {
+        console.log("BNB_BUSD=>>>>",response.data);
         setBCH_BCH(response.data);
       });
-      axios.get(BNB_BUSD).then((response) => {
+      axios.get(BTC_BTC).then((response) => {
         console.log("data=>>>>",response.data);
         setBTC_BTC(response.data);
       });
-      axios.get(BNB_BUSD).then((response) => {
-        console.log("data=>>>>",response.data);
+      axios.get(ETH_XRUNE).then((response) => {
+        let d = response.data.asset;
+        let v = d.split("-");
+        console.log("v==================>",v[0])
+        console.log("dataToggle=>>>>",response.data.asset);
         setETH_XRUNE(response.data);
+        setETH_XRUNE_Asset(v[0]);
+
       });
     }, []);
 
-  if (!bNB_BUSD ) return null;
+  // if (!bNB_BUSD  ) return null;
 
   return (
     <div>
@@ -91,14 +97,14 @@ export const HeroHome = () => {
                 <img style={{ paddingLeft: "15px" }} src={Images.btc} />
                 <div style={{ paddingLeft: "12px" }}>
                   <p class="marketparagraph pt-1">
-                    BTC/USDT <span class="spanclassmarket">{bNB_BUSD?(
+                    {bCH_BCH.asset} <span class="spanclassmarket">{bCH_BCH?(
                       <>
-                      { Number.parseFloat(bNB_BUSD.poolAPY).toFixed(2)}
+                      { Number.parseFloat(bCH_BCH.poolAPY).toFixed(2)}
                       </>
                     ):null}</span>
                   </p>
                   <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  {bNB_BUSD.assetPriceUSD}
+                  {bCH_BCH.assetPriceUSD}
                   </p>
                   <p>36,64120</p>
                 </div>
@@ -109,14 +115,14 @@ export const HeroHome = () => {
                 <img style={{ paddingLeft: "15px" }} src={Images.btc} />
                 <div style={{ paddingLeft: "12px" }}>
                   <p class="marketparagraph pt-1">
-                    BTC/USDT <span class="spanclassmarket">{bNB_BUSD?(
+                    {bTC_BTC.asset} <span class="spanclassmarket">{bTC_BTC?(
                       <>
-                      { Number.parseFloat(bNB_BUSD.poolAPY).toFixed(2)}
+                      { Number.parseFloat(bTC_BTC.poolAPY).toFixed(2)}
                       </>
                     ):null}</span>
                   </p>
                   <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  {bNB_BUSD.assetPriceUSD}
+                  {bTC_BTC.assetPriceUSD}
                   </p>
                   <p>36,64120</p>
                 </div>
@@ -127,14 +133,14 @@ export const HeroHome = () => {
                 <img style={{ paddingLeft: "15px" }} src={Images.btc} />
                 <div style={{ paddingLeft: "12px" }}>
                   <p class="marketparagraph pt-1">
-                    BTC/USDT <span class="spanclassmarket">{bNB_BUSD?(
+                    {eTH_XRUNE_Asset} <span class="spanclassmarket">{eTH_XRUNE?(
                       <>
-                      { Number.parseFloat(bNB_BUSD.poolAPY).toFixed(2)}
+                      { Number.parseFloat(eTH_XRUNE.poolAPY).toFixed(2)}
                       </>
                     ):null}</span>
                   </p>
                   <p style={{ fontSize: "20px", fontWeight: "bold" }}>
-                  {bNB_BUSD.assetPriceUSD}
+                  {eTH_XRUNE.assetPriceUSD}
                   </p>
                   <p>36,64120</p>
                 </div>
